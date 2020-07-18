@@ -40,7 +40,7 @@ public class Result {
         return new Result("fail", null);
     }
 
-    public static Result ok(Object data,int code) {
-        return new Result("登录成功", data,code);
+    public static Result ok(Object data,int status) {
+        return new Result("登录成功", data,status);
     }
 }

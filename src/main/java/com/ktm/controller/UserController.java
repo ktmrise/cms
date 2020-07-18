@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author author
@@ -24,5 +24,23 @@ import javax.annotation.Resource;
 public class UserController {
 
 
+    @Resource
+    private IUserService userService;
 
+
+    @RequestMapping("/login")
+    public Result login(User user) {
+        User dbUser = userService.getOne(new QueryWrapper<User>().eq("username", user.getUsername()));
+        if (user.getPassword().equals(dbUser.getPassword())) {
+            return Result.ok(dbUser,200);
+        }
+        throw new RuntimeException("用户不存在");
+
+    }
+
+
+    @RequestMapping("/logout")
+    public Result logout() {
+        return Result.ok();
+    }
 }
