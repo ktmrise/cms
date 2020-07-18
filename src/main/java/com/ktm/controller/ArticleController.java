@@ -3,13 +3,10 @@ package com.ktm.controller;
 
 import com.ktm.common.PageResult;
 import com.ktm.common.Result;
+import com.ktm.model.Article;
 import com.ktm.service.IArticleService;
 import com.ktm.vo.ArticleVo;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -41,6 +38,12 @@ public class ArticleController {
     @GetMapping("/findArticlePage")
     public PageResult findArticlePage(@RequestParam("page") int page, @RequestParam("pageSize") int row) {
         return articleService.findArticlePage(page, row);
+    }
 
+
+    @PostMapping("/saveOrUpdateArticle")
+    public Result saveOrUpdateArticle(Article article) {
+        articleService.saveOrUpdateArticle(article);
+        return Result.ok("success",null,200);
     }
 }

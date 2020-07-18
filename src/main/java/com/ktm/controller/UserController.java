@@ -32,7 +32,7 @@ public class UserController {
     public Result login(User user) {
         User dbUser = userService.getOne(new QueryWrapper<User>().eq("username", user.getUsername()));
         if (user.getPassword().equals(dbUser.getPassword())) {
-            return Result.ok(dbUser,200);
+            return Result.ok("登录成功",dbUser,200);
         }
         throw new RuntimeException("用户不存在");
 

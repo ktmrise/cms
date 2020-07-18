@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +61,18 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         int total = (int) articlePage.getTotal();
 
         return new PageResult(articleVos, total);
+    }
+
+    @Override
+    public void saveOrUpdateArticle(Article article) {
+        Article dbArticle = articleMapper.selectById(article.getId());
+        if (dbArticle == null) {
+            article.setCreateTime(LocalDateTime.now());
+            article.setViewCount(0);
+            articleMapper.insert(article);
+        } else {
+            articleMapper.updateById(article);
+        }
     }
 
 }

@@ -38,5 +38,7 @@ public class ArticleVo {
 
     private String cateGoryName;
 
+    private String content;
+
 
 }

@@ -22,7 +22,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class Article implements Serializable {
 
-    private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -38,6 +37,8 @@ public class Article implements Serializable {
 
     @TableField("viewCount")
     private Integer viewCount;
+
+    private String content;
 
 
 }
