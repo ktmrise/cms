@@ -32,4 +32,9 @@ public class User implements Serializable {
     private String userFace;
 
 
+    private String nickname;
+
+    private String email;
+
+
 }

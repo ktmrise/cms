@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ktm.common.Result;
 import com.ktm.model.User;
 import com.ktm.service.IUserService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -20,7 +22,7 @@ import javax.annotation.Resource;
  * @since 2020-07-17
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/manager/user")
 public class UserController {
 
 
@@ -32,7 +34,7 @@ public class UserController {
     public Result login(User user) {
         User dbUser = userService.getOne(new QueryWrapper<User>().eq("username", user.getUsername()));
         if (user.getPassword().equals(dbUser.getPassword())) {
-            return Result.ok("登录成功",dbUser,200);
+            return Result.ok("登录成功", dbUser, 200);
         }
         throw new RuntimeException("用户不存在");
 
@@ -42,5 +44,12 @@ public class UserController {
     @RequestMapping("/logout")
     public Result logout() {
         return Result.ok();
+    }
+
+
+    @GetMapping("/findAllUser")
+    public Result findAll() {
+       List<User> users= userService.findAllUser();
+        return Result.ok(users);
     }
 }
