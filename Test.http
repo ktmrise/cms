@@ -1,0 +1,26 @@
+
+
+
+###
+POST http://localhost:8099/manager/category/batchDeleteCategory
+Content-Type: application/json
+
+{
+  "ids": [3,4]
+}
+
+###
+GET http://localhost:8099/manager/category/deleteCategoryById?id=3
+Accept: application/json
+
+###
+POST http://localhost:8099/manager/category/saveOrUpdateCategory
+Content-Type: application/x-www-form-urlencoded
+
+id=1&name=python&parentId=2&description=balabala
+
+###
+GET http://localhost:8099/manager/category/findAllCategory
+Accept: application/json
+
+###

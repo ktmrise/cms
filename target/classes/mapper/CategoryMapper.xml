@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ktm.mapper.CategoryMapper">
+
+    <select id="findAllCategory" resultType="com.ktm.model.Category">
+        select  * from category;
+
+    </select>
+    <select id="selectNameById" resultType="java.lang.String" parameterType="java.lang.Integer">
+        select name from category where id=#{parentId};
+
+    </select>
+</mapper>
