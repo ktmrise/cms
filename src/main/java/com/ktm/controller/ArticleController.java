@@ -9,6 +9,7 @@ import com.ktm.vo.ArticleVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,14 +37,33 @@ public class ArticleController {
 
 
     @GetMapping("/findArticlePage")
-    public PageResult findArticlePage(@RequestParam("page") int page, @RequestParam("pageSize") int row) {
-        return articleService.findArticlePage(page, row);
+    public PageResult findArticlePage(@RequestParam("page") int page,
+                                      @RequestParam("pageSize") int row,
+                                      String keyWords, Integer cateGoryId) {
+        return articleService.findArticlePage(page, row, keyWords, cateGoryId);
     }
 
 
     @PostMapping("/saveOrUpdateArticle")
     public Result saveOrUpdateArticle(Article article) {
         articleService.saveOrUpdateArticle(article);
-        return Result.ok("success",null,200);
+        return Result.ok("success", null, 200);
+    }
+
+
+    @RequestMapping("/deleteArticleById")
+    public Result deleteArticleById(Integer id) {
+        articleService.removeById(id);
+        return Result.ok("删除成功", null, 200);
+    }
+
+    @PostMapping("/batchDeleteArticles")
+    public Result batchDeleteArticles(Integer[] ids) {
+        List<Integer> idList = Arrays.asList(ids);
+        boolean result = articleService.removeByIds(idList);
+        if (result) {
+            return Result.ok("删除成功", null, 200);
+        }
+        return Result.fail("删除失败",null,500);
     }
 }

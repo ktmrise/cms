@@ -19,7 +19,7 @@ public interface IArticleService extends IService<Article> {
 
     List<ArticleVo> findArticle();
 
-    PageResult findArticlePage(int page, int row);
+    PageResult findArticlePage(int page, int row,String keyWords,Integer cateGoryId);
 
     void saveOrUpdateArticle(Article article);
 }

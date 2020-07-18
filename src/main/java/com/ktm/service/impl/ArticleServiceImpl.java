@@ -47,8 +47,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public PageResult findArticlePage(int page, int row) {
-        Page<Article> articlePage = articleMapper.selectPage(new Page<>(page, row), null);
+    public PageResult findArticlePage(int page, int row, String keyWords, Integer cateGoryId) {
+        Page<Article> articlePage = articleMapper.selectPage(new Page<>(page, row), new QueryWrapper<Article>()
+                .like(keyWords != null, "title", keyWords)
+                .eq(cateGoryId != null, "categoryId", cateGoryId));
         List<Article> records = articlePage.getRecords();
         ArrayList<ArticleVo> articleVos = new ArrayList<>();
         for (Article record : records) {
