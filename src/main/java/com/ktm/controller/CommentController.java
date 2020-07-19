@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 /**
  * <p>
@@ -49,6 +50,12 @@ public class CommentController {
     @RequestMapping("/deleteCommentById")
     public Result deleteCommentById(Integer id) {
         commentService.removeById(id);
+        return Result.ok();
+    }
+
+    @RequestMapping("/batchDeleteComment")
+    public Result batchDeleteComment(Integer[] ids) {
+        commentService.removeByIds(Arrays.asList(ids));
         return Result.ok();
     }
 }

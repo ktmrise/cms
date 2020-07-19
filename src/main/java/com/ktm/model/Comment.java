@@ -28,10 +28,7 @@ public class Comment implements Serializable {
 
     private Integer articleid;
 
-    /**
-     * 1代表评论的文章存在
-0代表评论的文章已经不存在了
-     */
+
     private Integer status;
 
     private String content;

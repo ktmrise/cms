@@ -16,9 +16,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -85,12 +87,13 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public void updateCommentStatus(Integer id) {
+    public void removeRelatedComment(Integer id) {
         List<Comment> comments = commentMapper.selectList(new QueryWrapper<Comment>().eq("articleid", id));
-        for (Comment comment : comments) {
-            comment.setStatus(0);
-            commentMapper.updateById(comment);
+        List<Integer> ids = comments.stream().map(Comment::getId).collect(Collectors.toList());
+        if (ids.size()>0) {
+            commentMapper.deleteBatchIds(ids);
         }
+
     }
 
 }
