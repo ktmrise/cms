@@ -22,4 +22,6 @@ public interface IArticleService extends IService<Article> {
     PageResult findArticlePage(int page, int row,String keyWords,Integer cateGoryId);
 
     void saveOrUpdateArticle(Article article);
+
+    void updateCommentStatus(Integer id);
 }

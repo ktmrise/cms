@@ -1,10 +1,14 @@
 package com.ktm.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ktm.common.PageResult;
 import com.ktm.common.Result;
+import com.ktm.mapper.CommentMapper;
 import com.ktm.model.Article;
+import com.ktm.model.Comment;
 import com.ktm.service.IArticleService;
+import com.ktm.service.ICommentService;
 import com.ktm.vo.ArticleVo;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +31,8 @@ public class ArticleController {
 
     @Resource
     private IArticleService articleService;
+
+
 
 
     @GetMapping("/findArticle")
@@ -54,6 +60,8 @@ public class ArticleController {
     @RequestMapping("/deleteArticleById")
     public Result deleteArticleById(Integer id) {
         articleService.removeById(id);
+        articleService.updateCommentStatus(id);
+
         return Result.ok("删除成功", null, 200);
     }
 

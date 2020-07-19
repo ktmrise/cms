@@ -3,14 +3,17 @@ package com.ktm.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ktm.common.PageResult;
+import com.ktm.mapper.CommentMapper;
 import com.ktm.model.Article;
 import com.ktm.mapper.ArticleMapper;
+import com.ktm.model.Comment;
 import com.ktm.service.IArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ktm.vo.ArticleVo;
 import org.springframework.asm.RecordComponentVisitor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -26,11 +29,15 @@ import java.util.List;
  * @since 2020-07-18
  */
 @Service
+@Transactional
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements IArticleService {
 
 
     @Resource
     private ArticleMapper articleMapper;
+
+    @Resource
+    private CommentMapper commentMapper;
 
     @Override
     public List<ArticleVo> findArticle() {
@@ -74,6 +81,15 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             articleMapper.insert(article);
         } else {
             articleMapper.updateById(article);
+        }
+    }
+
+    @Override
+    public void updateCommentStatus(Integer id) {
+        List<Comment> comments = commentMapper.selectList(new QueryWrapper<Comment>().eq("articleid", id));
+        for (Comment comment : comments) {
+            comment.setStatus(0);
+            commentMapper.updateById(comment);
         }
     }
 
