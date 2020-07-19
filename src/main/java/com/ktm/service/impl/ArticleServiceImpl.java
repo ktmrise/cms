@@ -64,6 +64,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         ArrayList<ArticleVo> articleVos = new ArrayList<>();
         for (Article record : records) {
             ArticleVo articleVo = new ArticleVo();
+
+
             String cateGoryName = articleMapper.findCategoryNameByCategoryId(record.getCategoryId());
             articleVo.setCateGoryName(cateGoryName);
             BeanUtils.copyProperties(record, articleVo);

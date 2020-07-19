@@ -14,6 +14,6 @@ public class GlobalException {
     @ExceptionHandler(Exception.class)
     public Result handler(Exception e) {
         log.error(e.getMessage());
-        return new Result(e.getMessage());
+        return new Result(e.getMessage(),null,500);
     }
 }

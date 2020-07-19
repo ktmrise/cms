@@ -42,7 +42,7 @@ public class CategoryController {
     @PostMapping("/saveOrUpdateCategory")
     public Result saveOrUpdateCategory(Category category) {
         int resultNumber = categoryService.saveOrUpdateCategory(category);
-        return Result.ok(resultNumber);
+        return Result.ok("success",null,200);
     }
 
     @RequestMapping("/deleteCategoryById")

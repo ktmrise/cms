@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -23,14 +23,13 @@ public class FileUploadController {
 
 
     @PostMapping("/file/upload")
-    public Result fileUpload(MultipartFile file, HttpSession session) throws IOException {
+    public Result fileUpload(MultipartFile file) throws IOException {
         System.out.println(file.getOriginalFilename());
 
         String oldName = file.getOriginalFilename();
         String newName = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(oldName);
         String realPath = path + newName;
         file.transferTo(new File(realPath));
-        session.setAttribute("faceUrl","http://localhost:8099/"+newName);
-        return Result.ok("http://localhost:8099/"+newName);
+        return Result.ok("success","http://localhost:8099/"+newName,200);
     }
 }
