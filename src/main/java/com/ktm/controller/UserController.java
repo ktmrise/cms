@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -36,8 +37,7 @@ public class UserController {
     @Resource
     private IUserService userService;
 
-    @Value("photo.path")
-    private String path;
+
 
     @RequestMapping("/login")
     public Result login(User user) {
@@ -64,7 +64,7 @@ public class UserController {
 
 
     @RequestMapping("/saveOrUpdateUser")
-    public Result saveOrUpdateUser(User user) throws IOException {
+    public Result saveOrUpdateUser(User user, HttpSession session) throws IOException {
 
 
 //        String oldName = photo.getOriginalFilename();
@@ -73,6 +73,8 @@ public class UserController {
 //        String realPath = path + newName;
 //        photo.transferTo(new File(realPath));
 //        user.setUserFace(realPath);
+        String faceUrl = (String) session.getAttribute("faceUrl");
+        user.setUserFace(faceUrl);
         userService.saveOrUpdate(user);
 
 
