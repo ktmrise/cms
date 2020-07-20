@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class MybatisPlusConfig {
 
 
-
     @Bean
     public PaginationInterceptor getPaginationInterceptor() {
         return new PaginationInterceptor();

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -36,8 +37,12 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public PageResult findComment(int page, int row, String keyWords) {
+        List<Article> articles = articleMapper.selectList(new QueryWrapper<Article>().like(keyWords != null, "title", keyWords));
+        ArrayList<Integer> ids = (ArrayList<Integer>) articles.stream().map(Article::getId).collect(Collectors.toList());
         Page<Comment> commentPages = commentMapper.selectPage(new Page<>(page, row), new QueryWrapper<Comment>()
-                .like(keyWords != null, "content", keyWords));
+                .in(ids.size() > 0, "articleid", ids)
+                .or().like(keyWords != null, "content", keyWords)
+        );
         List<Comment> records = commentPages.getRecords();
         List<CommentVo> commentVos = new ArrayList<>();
         for (Comment record : records) {
