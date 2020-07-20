@@ -98,4 +98,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     }
 
+    @Override
+    public void updateViewCount(int id) {
+        Article article = articleMapper.selectById(id);
+        int viewCount = article.getViewCount() + 1;
+        article.setViewCount(viewCount);
+        articleMapper.updateById(article);
+    }
+
 }

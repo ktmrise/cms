@@ -29,8 +29,6 @@ public class ArticleController {
     private IArticleService articleService;
 
 
-
-
     @GetMapping("/findArticle")
     public Result findArticle() {
         List<ArticleVo> articleVos = articleService.findArticle();
@@ -68,6 +66,16 @@ public class ArticleController {
         if (result) {
             return Result.ok("删除成功", null, 200);
         }
-        return Result.fail("删除失败",null,500);
+        return Result.fail("删除失败", null, 500);
     }
+
+
+    @PostMapping("/updateViewCount")
+    public Result updateViewCount(int id) {
+        synchronized (ArticleController.class) {
+            articleService.updateViewCount(id);
+        }
+        return Result.ok();
+    }
+
 }

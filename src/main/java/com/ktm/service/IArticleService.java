@@ -24,4 +24,6 @@ public interface IArticleService extends IService<Article> {
     void saveOrUpdateArticle(Article article);
 
     void removeRelatedComment(Integer id);
+
+    void updateViewCount(int id);
 }
