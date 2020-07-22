@@ -38,7 +38,9 @@ public class CategoryController {
      */
     @GetMapping("/findAllCategory")
     public Result findAllCategory() {
+
         List<CateGoryVo> cateGoryVoList = categoryService.findAllCategory();
+
         return Result.ok(cateGoryVoList);
     }
 
@@ -50,7 +52,9 @@ public class CategoryController {
      */
     @PostMapping("/saveOrUpdateCategory")
     public Result saveOrUpdateCategory(Category category) {
+
         int resultNumber = categoryService.saveOrUpdateCategory(category);
+
         return Result.ok("success",null,200);
     }
 
@@ -61,10 +65,13 @@ public class CategoryController {
      */
     @RequestMapping("/deleteCategoryById")
     public Result deleteCategoryById(int id) {
+
         boolean result = categoryService.removeById(id);
+
         if (result) {
             return Result.ok();
         }
+
         return Result.fail();
     }
 
@@ -76,13 +83,15 @@ public class CategoryController {
      */
     @PostMapping(value = "/batchDeleteCategory")
     public Result batchDeleteCategory(Integer[] ids) {
-//        System.out.println(Arrays.toString(ids));
+
         List<Integer> list = Arrays.asList(ids);
 
         boolean result = categoryService.removeByIds(list);
+
         if (result) {
             return Result.ok();
         }
+
         return Result.fail();
     }
 }

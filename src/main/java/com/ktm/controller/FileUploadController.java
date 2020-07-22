@@ -24,18 +24,22 @@ public class FileUploadController {
 
     /**
      * 文件上传
+     *
      * @param file
      * @return
      * @throws IOException
      */
     @PostMapping("/file/upload")
     public Result fileUpload(MultipartFile file) throws IOException {
-        System.out.println(file.getOriginalFilename());
 
         String oldName = file.getOriginalFilename();
+
         String newName = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(oldName);
+
         String realPath = path + newName;
+
         file.transferTo(new File(realPath));
-        return Result.ok("success","http://localhost:8099/"+newName,200);
+
+        return Result.ok("success", "http://localhost:8099/" + newName, 200);
     }
 }

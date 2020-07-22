@@ -43,6 +43,7 @@ public class CommentController {
     public PageResult findComment(@RequestParam("page") int page,
                                   @RequestParam("pageSize") int row,
                                   String keyWords) {
+
         return commentService.findComment(page, row, keyWords);
     }
 
@@ -54,8 +55,11 @@ public class CommentController {
      */
     @RequestMapping("/publishComment")
     public Result publishComment(Comment comment) {
+
         comment.setCreateTime(LocalDateTime.now());
+
         commentService.saveOrUpdate(comment);
+
         return Result.ok();
     }
 
@@ -67,7 +71,9 @@ public class CommentController {
      */
     @RequestMapping("/deleteCommentById")
     public Result deleteCommentById(Integer id) {
+
         commentService.removeById(id);
+
         return Result.ok();
     }
 
@@ -79,7 +85,9 @@ public class CommentController {
      */
     @RequestMapping("/batchDeleteComment")
     public Result batchDeleteComment(Integer[] ids) {
+
         commentService.removeByIds(Arrays.asList(ids));
+
         return Result.ok();
     }
 }
