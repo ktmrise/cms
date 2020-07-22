@@ -5,4 +5,8 @@
     <select id="findAllUser" resultType="com.ktm.model.User">
         select * from user;
     </select>
+    <select id="findUserByName" resultType="com.ktm.model.User" parameterType="java.lang.String">
+        select * from user where username=#{name };
+
+    </select>
 </mapper>

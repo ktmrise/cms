@@ -22,6 +22,12 @@ public class FileUploadController {
     private String path;
 
 
+    /**
+     * 文件上传
+     * @param file
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/file/upload")
     public Result fileUpload(MultipartFile file) throws IOException {
         System.out.println(file.getOriginalFilename());

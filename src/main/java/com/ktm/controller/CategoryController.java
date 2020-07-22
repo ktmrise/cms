@@ -32,6 +32,10 @@ public class CategoryController {
     private ICategoryService categoryService;
 
 
+    /**
+     * 查询所有栏目
+     * @return
+     */
     @GetMapping("/findAllCategory")
     public Result findAllCategory() {
         List<CateGoryVo> cateGoryVoList = categoryService.findAllCategory();
@@ -39,12 +43,22 @@ public class CategoryController {
     }
 
 
+    /**
+     * 保存或者更新栏目
+     * @param category
+     * @return
+     */
     @PostMapping("/saveOrUpdateCategory")
     public Result saveOrUpdateCategory(Category category) {
         int resultNumber = categoryService.saveOrUpdateCategory(category);
         return Result.ok("success",null,200);
     }
 
+    /**
+     * 删除单个栏目
+     * @param id
+     * @return
+     */
     @RequestMapping("/deleteCategoryById")
     public Result deleteCategoryById(int id) {
         boolean result = categoryService.removeById(id);
@@ -54,6 +68,12 @@ public class CategoryController {
         return Result.fail();
     }
 
+
+    /**
+     * 批量删除栏目
+     * @param ids
+     * @return
+     */
     @PostMapping(value = "/batchDeleteCategory")
     public Result batchDeleteCategory(Integer[] ids) {
 //        System.out.println(Arrays.toString(ids));

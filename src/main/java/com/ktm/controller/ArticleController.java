@@ -29,6 +29,10 @@ public class ArticleController {
     private IArticleService articleService;
 
 
+    /**
+     * 查询所有文章
+     * @return
+     */
     @GetMapping("/findArticle")
     public Result findArticle() {
         List<ArticleVo> articleVos = articleService.findArticle();
@@ -36,6 +40,14 @@ public class ArticleController {
     }
 
 
+    /**
+     * 分页，按关键字（标题）查询文章
+     * @param page
+     * @param row
+     * @param keyWords
+     * @param cateGoryId
+     * @return
+     */
     @GetMapping("/findArticlePage")
     public PageResult findArticlePage(@RequestParam("page") int page,
                                       @RequestParam("pageSize") int row,
@@ -44,6 +56,11 @@ public class ArticleController {
     }
 
 
+    /**
+     * 保存或者更新文章
+     * @param article
+     * @return
+     */
     @PostMapping("/saveOrUpdateArticle")
     public Result saveOrUpdateArticle(Article article) {
         articleService.saveOrUpdateArticle(article);
@@ -51,6 +68,11 @@ public class ArticleController {
     }
 
 
+    /**
+     * 删除单条文章
+     * @param id
+     * @return
+     */
     @RequestMapping("/deleteArticleById")
     public Result deleteArticleById(Integer id) {
         articleService.removeById(id);
@@ -59,6 +81,11 @@ public class ArticleController {
         return Result.ok("删除成功", null, 200);
     }
 
+    /**
+     * 批量删除文章
+     * @param ids
+     * @return
+     */
     @PostMapping("/batchDeleteArticles")
     public Result batchDeleteArticles(Integer[] ids) {
         List<Integer> idList = Arrays.asList(ids);
@@ -70,6 +97,11 @@ public class ArticleController {
     }
 
 
+    /**
+     * 更新文章查看次数
+     * @param id
+     * @return
+     */
     @PostMapping("/updateViewCount")
     public Result updateViewCount(int id) {
         synchronized (ArticleController.class) {

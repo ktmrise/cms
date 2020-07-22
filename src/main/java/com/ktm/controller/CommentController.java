@@ -32,6 +32,13 @@ public class CommentController {
     private ICommentService commentService;
 
 
+    /**
+     * 分页，按关键字查询评论
+     * @param page
+     * @param row
+     * @param keyWords
+     * @return
+     */
     @GetMapping("/findComment")
     public PageResult findComment(@RequestParam("page") int page,
                                   @RequestParam("pageSize") int row,
@@ -40,6 +47,11 @@ public class CommentController {
     }
 
 
+    /**
+     * 发布评论
+     * @param comment
+     * @return
+     */
     @RequestMapping("/publishComment")
     public Result publishComment(Comment comment) {
         comment.setCreateTime(LocalDateTime.now());
@@ -47,12 +59,24 @@ public class CommentController {
         return Result.ok();
     }
 
+
+    /**
+     * 删除单条评论
+     * @param id
+     * @return
+     */
     @RequestMapping("/deleteCommentById")
     public Result deleteCommentById(Integer id) {
         commentService.removeById(id);
         return Result.ok();
     }
 
+
+    /**
+     * 批量删除评论
+     * @param ids
+     * @return
+     */
     @RequestMapping("/batchDeleteComment")
     public Result batchDeleteComment(Integer[] ids) {
         commentService.removeByIds(Arrays.asList(ids));
