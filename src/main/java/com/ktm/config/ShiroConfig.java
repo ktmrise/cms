@@ -21,6 +21,7 @@ public class ShiroConfig {
         map.put("/static/**", "anon");
         map.put("/manager/user/logout", "anon");
         map.put("/manager/user/login", "anon");
+        map.put("/manager/file/upload", "anon");
         map.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;

@@ -40,6 +40,8 @@ public class FileUploadController {
 
         file.transferTo(new File(realPath));
 
+        System.out.println(oldName);
+
         return Result.ok("success", "http://localhost:8099/" + newName, 200);
     }
 }
