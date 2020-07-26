@@ -11,6 +11,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -97,5 +98,12 @@ public class UserController {
         userService.saveOrUpdate(user);
 
         return Result.ok("success", null, 200);
+    }
+
+
+    @PostMapping("/deleteUserById")
+    public Result deleteUserById(int id) {
+        userService.removeById(id);
+        return Result.ok();
     }
 }

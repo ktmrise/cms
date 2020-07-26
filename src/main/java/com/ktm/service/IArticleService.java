@@ -26,4 +26,6 @@ public interface IArticleService extends IService<Article> {
     void removeRelatedComment(Integer id);
 
     void updateViewCount(int id);
+
+    void removeRelatedComment(List<Integer> idList);
 }

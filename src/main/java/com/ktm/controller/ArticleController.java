@@ -104,14 +104,14 @@ public class ArticleController {
 
         List<Integer> idList = Arrays.asList(ids);
 
-        boolean result = articleService.removeByIds(idList);
+        articleService.removeByIds(idList);
 
-        if (result) {
-            return Result.ok("删除成功", null, 200);
-        }
+        articleService.removeRelatedComment(idList);
 
 
-        return Result.fail("删除失败", null, 500);
+        return Result.ok("删除成功", null, 200);
+
+
     }
 
 

@@ -19,7 +19,9 @@ import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -104,6 +106,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         int viewCount = article.getViewCount() + 1;
         article.setViewCount(viewCount);
         articleMapper.updateById(article);
+    }
+
+    @Override
+    public void removeRelatedComment(List<Integer> idList) {
+
+        commentMapper.delete(new QueryWrapper<Comment>().in("articleid", idList));
     }
 
 }

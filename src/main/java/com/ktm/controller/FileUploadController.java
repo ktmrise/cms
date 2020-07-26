@@ -29,7 +29,7 @@ public class FileUploadController {
      * @return
      * @throws IOException
      */
-    @PostMapping("/file/upload")
+    @RequestMapping("/file/upload")
     public Result fileUpload(MultipartFile file) throws IOException {
 
         String oldName = file.getOriginalFilename();

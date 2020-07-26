@@ -32,7 +32,7 @@ public class Result {
     }
 
     public static Result ok() {
-        return new Result("success", null);
+        return new Result("success", null,200);
     }
 
 
